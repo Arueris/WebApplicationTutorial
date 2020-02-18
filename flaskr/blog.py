@@ -28,7 +28,7 @@ def create():
         title = request.form['title']
         body = request.form['body']
         error = None
-
+        table = 'post'
         if not title:
             error = 'Title is required.'
 
@@ -37,7 +37,7 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, author_id)'
+                f'INSERT INTO {table} (title, body, author_id)'
                 ' VALUES (?,?,?)',
                 (title, body, g.user['id'])
             )
